@@ -656,6 +656,7 @@ client.on('interactionCreate', async interaction => {
   if (interaction.isCommand()) {
     assertType<CommandInteraction>(interaction);
     assertType<CommandInteractionOptionResolver>(interaction.options);
+    assertType<readonly CommandInteractionOption[]>(interaction.options.data);
 
     const optionalOption = interaction.options.get('name');
     const requiredOption = interaction.options.get('name', true);
@@ -668,6 +669,13 @@ client.on('interactionCreate', async interaction => {
     assertType<string>(interaction.options.getString('name', true));
 
     assertType<string>(interaction.options.getSubCommand());
+    assertType<string>(interaction.options.getSubCommand(true));
+    assertType<string | null>(interaction.options.getSubCommand(booleanValue));
+    assertType<string | null>(interaction.options.getSubCommand(false));
+
     assertType<string>(interaction.options.getSubCommandGroup());
+    assertType<string>(interaction.options.getSubCommandGroup(true));
+    assertType<string | null>(interaction.options.getSubCommandGroup(booleanValue));
+    assertType<string | null>(interaction.options.getSubCommandGroup(false));
   }
 });
